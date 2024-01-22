@@ -1,0 +1,19 @@
+{
+  "name": "chonpiler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "generate.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ericn't",
+  "license": "MIT",
+  "dependencies": {
+    "fs-extra": "^11.2.0",
+    "readline-sync": "^1.4.10",
+    "rimraf": "^5.0.5"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}

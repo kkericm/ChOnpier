@@ -25,12 +25,9 @@ async function removerArquivosTS(caminho) {
                 await removerArquivosTS(caminhoItem);
             } else if (stats.isFile() && path.extname(item) === '.ts') {
                 await fs.unlink(caminhoItem);
-                console.log(`Removido: ${caminhoItem}`);
             }
         }
-    } catch (error) {
-      console.error('Erro ao remover arquivos .ts:', error);
-    }
+    } catch (error) {}
 }
 
 async function copiarArquivosModificados(caminhoAtual, caminhoDestino) {
@@ -38,34 +35,33 @@ async function copiarArquivosModificados(caminhoAtual, caminhoDestino) {
         const itens = await fs.readdir(caminhoAtual);
     
         for (const item of itens) {
-                const caminhoItemOrigem = path.join(caminhoAtual, item);
-                const caminhoItemDestino1 = path.join(caminhoDestino, item);
-        
-                const statsOrigem = await fs.stat(caminhoItemOrigem);
-                const statsDestino1 = await fs.stat(caminhoItemDestino1).catch(() => null);
-        
-                if (statsOrigem.isDirectory()) {
-                    await copiarArquivosModificados(caminhoItemOrigem, caminhoItemDestino1);
-                } else if (statsOrigem.isFile()) {
-                    if (!statsDestino1 || statsOrigem.mtime > statsDestino1.mtime) {
-                        await fs.copy(caminhoItemOrigem, caminhoItemDestino1);
-                        console.log(`Copiado para ${pastaDestino1}: ${caminhoItemOrigem}`);
-                    }
+            const caminhoItemOrigem = path.join(caminhoAtual, item);
+            const caminhoItemDestino1 = path.join(caminhoDestino, item);
+    
+            const statsOrigem = await fs.stat(caminhoItemOrigem);
+            const statsDestino1 = await fs.stat(caminhoItemDestino1).catch(() => null);
+    
+            if (statsOrigem.isDirectory()) {
+                await copiarArquivosModificados(caminhoItemOrigem, caminhoItemDestino1);
+            } else if (statsOrigem.isFile()) {
+                if (!statsDestino1 || statsOrigem.mtime > statsDestino1.mtime) {
+                    await fs.copy(caminhoItemOrigem, caminhoItemDestino1);
+                    //console.log(`Compiled ${pastaDestino1.split('\\').slice(-1)}: ${caminhoItemOrigem}`);
                 }
             }
+        }
     } catch (error) {
-        console.error('Erro ao copiar arquivos:', error);
+        console.error('Compilation Error:', error);
     }
 }
 
 copiarArquivosModificados("./RP", pastaDestino1)
 copiarArquivosModificados("./BP", pastaDestino2)
-fs.writeFileSync(`${pastaDestino2}/tsconfig.json`, JSON.stringify(config.tsConfig, undefined, 4), { encoding: "utf-8" })
+fs.writeFileSync(`${pastaDestino2}tsconfig.json`, JSON.stringify(config.tsConfig, undefined, 4), { encoding: "utf-8" })
 
 const command = `tsc -p "${pastaDestino2}tsconfig.json"`
 
-execSync(command)
-
-removerArquivosTS(pastaDestino2)
-
-fs.removeSync(`${pastaDestino2}/tsconfig.json`)
+exec(command, (err, stdout, stderr) => {
+    removerArquivosTS(pastaDestino2)
+    fs.removeSync(`${pastaDestino2}tsconfig.json`)
+})

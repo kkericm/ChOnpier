@@ -3,7 +3,7 @@ const readSync = require('readline-sync');
 const path = require('path');
 const uuid = require('uuid');
 
-const MainEnvironment = "C:/Users/Eric Melo/Desktop/ChOnpiler/environment"
+const MainEnvironment = "C:/Users/Eric Melo/Desktop/ChOnpiler/tests/environment"
 const uuidRP = uuid.v4()
 const uuidBP = uuid.v4()
 
@@ -91,3 +91,23 @@ fs.writeFileSync(path.join(name, 'RP', "manifest.json"), JSON.stringify(addon.RP
 fs.mkdirSync(path.join(name, "RP", "texts"))
 fs.writeFileSync(path.join(name, 'RP', "texts", "en_US.lang"), "")
 fs.writeFileSync(path.join(name, 'RP', "texts", "languages.json"), `["en_US"]`)
+
+const config = {
+    name: name,
+    tsConfig: {
+        compilerOptions: {
+            target: "es2016",
+            module: "ES2022",
+            esModuleInterop: true,
+            forceConsistentCasingInFileNames: true,
+            strict: true,
+            skipLibCheck: true
+        },
+        include: [
+            "./scripts/**/*.ts"
+        ],
+        exclude: []
+    }
+}
+
+fs.writeFileSync(path.join(name, "config.json"), JSON.stringify(config, undefined, 4))

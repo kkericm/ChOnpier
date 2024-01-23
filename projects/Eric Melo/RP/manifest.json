@@ -1,0 +1,50 @@
+{
+    "format_version": 2,
+    "metadata": {
+        "authors": [
+            "Eric Melo Author"
+        ],
+        "generated_with": {
+            "ChOnpiler": [
+                "1.0.0",
+                "https://github.com/kkericm/ChOnpiler"
+            ]
+        }
+    },
+    "header": {
+        "name": "Eric Melo",
+        "description": "",
+        "min_engine_version": [
+            1,
+            20,
+            0
+        ],
+        "uuid": "98040c34-3996-476a-bcaf-41f4c43f4dac",
+        "version": [
+            1,
+            0,
+            0
+        ]
+    },
+    "modules": [
+        {
+            "type": "resources",
+            "uuid": "d76bc371-cde4-4492-bd12-c424ce62327b",
+            "version": [
+                1,
+                0,
+                0
+            ]
+        }
+    ],
+    "dependencies": [
+        {
+            "uuid": "649a6361-ff52-4f4c-863d-ec89470620da",
+            "version": [
+                1,
+                0,
+                0
+            ]
+        }
+    ]
+}

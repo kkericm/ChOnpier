@@ -1,23 +1,37 @@
-const fs = require('fs');
+const fs = require('fs-extra');
 const readSync = require('readline-sync');
 const path = require('path');
 const uuid = require('uuid');
 
-const MainEnvironment = "C:/Users/Eric Melo/Desktop/ChOnpiler/tests/environment"
+const MainEnvironment = "."
 const uuidRP = uuid.v4()
 const uuidBP = uuid.v4()
 
-var name = readSync.question(`name ("New Addon"): `)
-name = name === "" ? "New Addon" : name
+const arg = process.argv.slice(2)
+
+// console.log(arg)
+
+var name = arg[0]
+var author = arg[1]
+var description = arg[2]
 
 let items = fs.readdirSync(MainEnvironment)
 let copys = items.reduce((i, element) => (element.startsWith(name) ? i + 1 : i), 0)
 name = name + (copys > 0 ? ` (${copys})` : "")
 
-var author = readSync.question(`author ("${name} Author"): `)
-author = author === "" ? `${name} Author` : author
 
-var description = readSync.question(`description: `)
+// var name = readSync.question(`name ("New Addon"): `)
+// name = name === "" ? "New Addon" : name
+
+// let items = fs.readdirSync(MainEnvironment)
+// let copys = items.reduce((i, element) => (element.startsWith(name) ? i + 1 : i), 0)
+// name = name + (copys > 0 ? ` (${copys})` : "")
+
+// var author = readSync.question(`author ("${name} Author"): `)
+// author = author === "" ? `${name} Author` : author
+
+// var description = readSync.question(`description: `)
+
 
 var addon = {
     RP: {
@@ -79,15 +93,17 @@ var addon = {
 }
 fs.mkdirSync(name)
 
+fs.copy('../compiler/c/compiler.exe', path.join(name, "update.exe"))
+
 fs.mkdirSync(path.join(name, "dist"))
 
 fs.mkdirSync(path.join(name, "BP"))
-fs.writeFileSync(path.join(name, 'BP', "manifest.json"), JSON.stringify(addon.BP, undefined, 4), {encoding: "utf-8"})
+fs.writeFileSync(path.join(name, 'BP', "manifest.json"), JSON.stringify(addon.BP, undefined, 4), { encoding: "utf-8" })
 fs.mkdirSync(path.join(name, "BP", "scripts"))
 fs.writeFileSync(path.join(name, 'BP', "scripts", "entry.js"), "")
 
 fs.mkdirSync(path.join(name, "RP"))
-fs.writeFileSync(path.join(name, 'RP', "manifest.json"), JSON.stringify(addon.RP, undefined, 4), {encoding: "utf-8"})
+fs.writeFileSync(path.join(name, 'RP', "manifest.json"), JSON.stringify(addon.RP, undefined, 4), { encoding: "utf-8" })
 fs.mkdirSync(path.join(name, "RP", "texts"))
 fs.writeFileSync(path.join(name, 'RP', "texts", "en_US.lang"), "")
 fs.writeFileSync(path.join(name, 'RP', "texts", "languages.json"), `["en_US"]`)

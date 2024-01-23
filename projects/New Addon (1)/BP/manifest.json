@@ -1,0 +1,65 @@
+{
+    "format_version": 2,
+    "metadata": {
+        "authors": [
+            "New Addon Author"
+        ],
+        "generated_with": {
+            "ChOnpiler": [
+                "1.0.0",
+                "https://github.com/kkericm/ChOnpiler"
+            ]
+        }
+    },
+    "header": {
+        "name": "New Addon (1)",
+        "description": "",
+        "min_engine_version": [
+            1,
+            20,
+            0
+        ],
+        "uuid": "54563647-0faf-4b1d-a53a-57322a86f799",
+        "version": [
+            1,
+            0,
+            0
+        ]
+    },
+    "modules": [
+        {
+            "type": "data",
+            "uuid": "df8aab9c-0295-4d43-822c-a9077b5ed285",
+            "version": [
+                1,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "script",
+            "language": "javascript",
+            "uuid": "824ace36-82a4-4295-89fc-8fbc7bb451ff",
+            "entry": "scripts/entry.js",
+            "version": [
+                1,
+                0,
+                0
+            ]
+        }
+    ],
+    "dependencies": [
+        {
+            "uuid": "22e5baa1-105a-4203-a56b-6a733824db67",
+            "version": [
+                1,
+                0,
+                0
+            ]
+        },
+        {
+            "module_name": "@minecraft/server",
+            "version": "1.7.0"
+        }
+    ]
+}

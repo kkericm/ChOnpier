@@ -1,0 +1,50 @@
+{
+    "format_version": 2,
+    "metadata": {
+        "authors": [
+            "New Addon Author"
+        ],
+        "generated_with": {
+            "ChOnpiler": [
+                "1.0.0",
+                "https://github.com/kkericm/ChOnpiler"
+            ]
+        }
+    },
+    "header": {
+        "name": "New Addon (2)",
+        "description": "",
+        "min_engine_version": [
+            1,
+            20,
+            0
+        ],
+        "uuid": "fe0c0a9a-0b77-4cdd-9590-9de505992d8e",
+        "version": [
+            1,
+            0,
+            0
+        ]
+    },
+    "modules": [
+        {
+            "type": "resources",
+            "uuid": "7cd8f281-0db6-4d13-9e49-119f54703525",
+            "version": [
+                1,
+                0,
+                0
+            ]
+        }
+    ],
+    "dependencies": [
+        {
+            "uuid": "177d1d6c-48c4-4429-b06a-8d8d46a28724",
+            "version": [
+                1,
+                0,
+                0
+            ]
+        }
+    ]
+}
